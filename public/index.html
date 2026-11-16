@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Secure Web Server Lab</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<main>
+  <h1>Secure Web Server Lab</h1>
+  <p class="muted">HTTP vs HTTPS, TLS certificates and packet capture - all numbers come from real traffic on this machine.</p>
+
+  <div class="row">
+    <div class="card"><h3>This connection (TLS monitor)</h3><dl id="conn"></dl></div>
+    <div class="card"><h3>Server certificate</h3><dl id="cert"></dl></div>
+  </div>
+
+  <h2>1 · What can an eavesdropper see?</h2>
+  <p class="muted">The same login is sent to the HTTP server (:8080) and the HTTPS server (:4433). A relay in the middle records every byte, like Wireshark would.</p>
+  <div class="card">
+    <form id="cmpForm" class="inline">
+      <label>username <input name="username" value="sujal" maxlength="64"></label>
+      <label>password <input name="password" value="S3cret!pw" maxlength="64"></label>
+      <label>TLS <select name="tlsVersion"><option value="1.3">1.3</option><option value="1.2">1.2</option></select></label>
+      <button>Run experiment</button>
+    </form>
+    <div id="cmpOut" class="muted">Press “Run experiment”.</div>
+  </div>
+
+  <h2>2 · Who trusts which certificate?</h2>
+  <p class="muted">Rows: the certificate the server presents. Columns: how the client is set up.</p>
+  <div class="card">
+    <form id="certForm" class="inline"><button>Run certificate check</button></form>
+    <div id="certOut" class="muted">Press “Run certificate check”.</div>
+  </div>
+
+  <h2>3 · Try it yourself</h2>
+  <div class="card"><ul class="mono">
+    <li>curl -k -X POST https://localhost:4433/login -H "Content-Type: application/json" -d '{"username":"sujal"}'</li>
+    <li>curl --cacert certs/server.crt https://localhost:4433/api/whoami</li>
+    <li>curl -i http://localhost:8082/anything &nbsp;(redirects to HTTPS)</li>
+    <li>openssl s_client -connect localhost:4433 -servername localhost</li>
+    <li>openssl s_client -connect localhost:4433 -tls1_1 -cipher 'DEFAULT:@SECLEVEL=0' &nbsp;(server refuses TLS 1.1)</li>
+    <li>Wireshark on the loopback interface, filters <b>http</b> and <b>tls</b> - see docs/wireshark-guide.md</li>
+  </ul></div>
+</main>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+:root { color-scheme: light dark; --bg: #f5f6f8; --fg: #1a1e24; --muted: #5d6773; --card: #fff; --line: #d8dce2; --ok: #0b7a3d; --bad: #b3261e; --accent: #1d5fbf; --okbg: #e6f4ea; --badbg: #fce8e6; }
+@media (prefers-color-scheme: dark) { :root { --bg: #14171b; --fg: #e5e8ec; --muted: #94a0ad; --card: #1d2227; --line: #323a43; --ok: #4cc27f; --bad: #f2776c; --accent: #7aa8f0; --okbg: #17301f; --badbg: #3a1c1a; } }
+* { box-sizing: border-box; }
+body { margin: 0; font: 15px/1.5 system-ui, sans-serif; background: var(--bg); color: var(--fg); }
+main { max-width: 1100px; margin: 0 auto; padding: 20px 16px 56px; }
+h1 { font-size: 24px; margin: 0; } h2 { font-size: 18px; margin: 30px 0 4px; } h3 { font-size: 14px; margin: 0 0 6px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.row { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); margin-top: 14px; }
+dl { margin: 0; display: grid; grid-template-columns: max-content 1fr; gap: 2px 12px; font-size: 13.5px; } dt { color: var(--muted); } dd { margin: 0; word-break: break-word; }
+form.inline { display: flex; flex-wrap: wrap; gap: 10px; align-items: end; margin-bottom: 12px; }
+label { display: flex; flex-direction: column; font-size: 12px; color: var(--muted); gap: 2px; }
+input, select { font: inherit; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--fg); }
+button { font: inherit; padding: 7px 14px; border: 0; border-radius: 6px; background: var(--accent); color: #fff; cursor: pointer; } button:disabled { opacity: .5; }
+pre, .mono { font: 12.5px/1.45 ui-monospace, Menlo, monospace; } pre { margin: 0; white-space: pre-wrap; word-break: break-all; background: color-mix(in srgb, var(--fg) 6%, transparent); border-radius: 6px; padding: 8px 10px; max-height: 240px; overflow: auto; }
+mark { background: #ffd54a; color: #000; padding: 0 1px; border-radius: 2px; font-weight: 600; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 10px; } th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; } th { color: var(--muted); }
+.banner { border-radius: 6px; padding: 8px 10px; font-weight: 600; margin: 6px 0; } .banner.bad { background: var(--badbg); color: var(--bad); } .banner.ok { background: var(--okbg); color: var(--ok); }
+td.good { background: var(--okbg); } td.badc { background: var(--badbg); }
+.ok { color: var(--ok); } .bad { color: var(--bad); } .muted { color: var(--muted); }
